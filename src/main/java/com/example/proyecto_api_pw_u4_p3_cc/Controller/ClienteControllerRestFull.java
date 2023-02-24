@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,15 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.proyecto_api_pw_u4_p3_cc.service.IClienteService;
 import com.example.proyecto_api_pw_u4_p3_cc.model.*;
 
-
 @RestController
 @RequestMapping("/clientes")
 public class ClienteControllerRestFull {
 
-    
     @Autowired
     private IClienteService clienteService;
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping(path = "/cedula/{cedula}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cliente> buscarClientePorCedula(@PathVariable("cedula") String cedula) {
         // TODO Auto-generated method stub
@@ -57,6 +57,7 @@ public class ClienteControllerRestFull {
     }
 
     @DeleteMapping(path = "/cedula/{cedula}")
+    @CrossOrigin(origins = "http://localhost:8080")
     public void borrarPorCedual(@PathVariable("cedula") String cedula) {
         // TODO Auto-generated method stub
         this.clienteService.borrarPorCedual(cedula);
